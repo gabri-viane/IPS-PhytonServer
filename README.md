@@ -68,7 +68,7 @@ Prints every tag value formatted by the `print_antenne()' function.
 ***
 
 THIS FUNCTION NEEDS A SPECIFIC LIST TO WORK:
->First value--> Antenna ID sending the data
+>First value--> Antenna ID sending the data<br>
 >Second value--> Number of tags found by the antenna
 BASED ON THE SECOND VALUE, THE FUNCTION WILL CHECK FOR EVERY TAG TWO VALUES:
 >tag ID, rssi value.
