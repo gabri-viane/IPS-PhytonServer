@@ -31,7 +31,7 @@ Search if the specified antenna is in the db or not.
 Print in an user-friendly way all the data. 
 >This will probably be removed when the pandas dataframe is 100% active.
 
-##TAGS(class):
+**TAGS(class):**
 Static class. Will store all the tags inside the list "lista"
 
 `add_tag(tag_n)`
