@@ -68,10 +68,10 @@ Prints every tag value formatted by the `print_antenne()' function.
 ***
 
 THIS FUNCTION NEEDS A SPECIFIC LIST TO WORK:
-First value--> Antenna number sending the data
-Second value--> Number of tags found by the antenna
+>First value--> Antenna ID sending the data
+>Second value--> Number of tags found by the antenna
 BASED ON THE SECOND VALUE, THE FUNCTION WILL CHECK FOR EVERY TAG TWO VALUES:
-tag number, rssi value.
+>tag ID, rssi value.
 ***
 ![value list](https://user-images.githubusercontent.com/34715958/201696677-6bab8f60-6641-4456-ac7d-d5df707b5d49.png)
 Calls the TAGS function `add_value` to add the data received
