@@ -1,11 +1,11 @@
 # IPS-PhytonServer
 
-#web.py
+**web.py**
 UDP(2522 port) reader. 
 Receive bytes and automtically decodes them for the elaboration.
 
-#modulo_tag.py
-##TAG(class):
+**modulo_tag.py**
+TAG(class):
 Automatically divides data received by the antennas in different lists to easily elaborates those in a future moment.
 
 `add_antenna(antenna, valore)`
@@ -49,13 +49,14 @@ Used by the `elaborate_data(data)` function to add values to the received tag. T
 `print_tags()`
 Prints every tag value formatted by the `print_antenne()' function.
 
-###`elaborate_data(data)`
-***
+***`elaborate_data(data)`
+
 THIS FUNCTION NEEDS A SPECIFIC LIST TO WORK:
 First value--> Antenna number sending the data
 Second value--> Number of tags found by the antenna
 BASED ON THE SECOND VALUE, THE FUNCTION WILL CHECK FOR EVERY TAG TWO VALUES:
 tag number, rssi value.
 ***
-![Example](https://imgur.com/a/Y0Ieh4s)
+![value list](https://user-images.githubusercontent.com/34715958/201696677-6bab8f60-6641-4456-ac7d-d5df707b5d49.png)
 Calls the TAGS function `add_value` to add the data received
+
