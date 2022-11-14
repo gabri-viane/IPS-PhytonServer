@@ -52,7 +52,7 @@ class TAGS:
         return "NON PRESENTE"
 
     @staticmethod
-    def add_value(codice, value, antenna): #DA SISTEMARE
+    def add_value(codice, value, antenna):
         codice = int(codice)
         value = int(value)
         antenna = int(antenna)
