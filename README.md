@@ -70,7 +70,7 @@ Prints every tag value formatted by the `print_antenne()' function.
 THIS FUNCTION NEEDS A SPECIFIC LIST TO WORK:
 >First value--> Antenna ID sending the data<br>
 >Second value--> Number of tags found by the antenna<br>
-BASED ON THE SECOND VALUE, THE FUNCTION WILL CHECK FOR EVERY TAG TWO VALUES:
+BASED ON THE SECOND VALUE, THE FUNCTION WILL CHECK FOR EVERY TAG TWO VALUES:<br>
 >tag ID, rssi value.
 ***
 ![value list](https://user-images.githubusercontent.com/34715958/201696677-6bab8f60-6641-4456-ac7d-d5df707b5d49.png)
