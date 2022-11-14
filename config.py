@@ -5,6 +5,9 @@ config = configparser.ConfigParser()
 
 # Crea file di configurazione se non esiste
 if not os.path.isfile("config.ini"):
+    print("""
+    FILE DI CONFIGURAZIONE NON TROVATO.
+    CREO IL FILE DI CONFIGURAZIONE CON I VALORI DI DEFAULT.""")
     config['WEB'] = {
         'PORT': 2522,
         'BUFFER_SIZE': 1024}
