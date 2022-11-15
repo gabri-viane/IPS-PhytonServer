@@ -1,3 +1,3 @@
 import web
-print(web.Receiver.read())
-
+while True:
+    web.UDPSERVER.richiesta()
