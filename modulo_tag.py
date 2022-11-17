@@ -1,62 +1,41 @@
 from datetime import datetime
+import pandas as pd
+from time import perf_counter
 
 
 class TAG:
     def __init__(self, codice):
         self.codice = codice
-        self.antenne = []
+        self.dati = {}
 
-    # aggiungo una lista in caso una nuova antenna sia riconosciuta
-    # abbiamo quindi potenzialmente infinite antenne
-    def add_antenna(self, antenna, valore):
-        self.antenne.append({"n_antenna": antenna,
-                             "valori": {self.orario(): valore}})
-
-    # aggiungo valore
-    def add_value(self, antenna, valore):
-        index = self.search_dict(antenna)
-        if isinstance(index, int):
-            self.antenne[index]["valori"][self.orario()] = valore
+    def add_value(self, antenna, value, tempo):
+        if tempo in self.dati:
+            self.dati[tempo][antenna] = value
         else:
-            self.add_antenna(antenna, valore)
+            self.dati[tempo] = {antenna: value}
 
-    # cerco se e' stata gia' creata antenna
-    def search_dict(self, antenna):
-        for i in range(len(self.antenne)):
-            if antenna == self.antenne[i]["n_antenna"]:
-                return i
-        return "NON_PRESENTE"
-
-    def print_antenne(self):
-        print(f"\nNUMERO TAG:{self.codice}")
-        print(f"ANTENNE CREATE: {len(self.antenne)}")
-        for antenna in self.antenne:
-            print(f"NUMERO ANTENNA: {antenna['n_antenna']}")
-            print(antenna["valori"])
-        print("\n")
-
-    def orario(self):
-        return datetime.now().strftime('%H:%M:%S')
+    def dataframe(self):
+        df = pd.DataFrame.from_dict(self.dati, orient="index")
+        return df
 
 
 class TAGS:
-    global lista
     lista = []
 
-    @staticmethod
-    def add_tag(tag_n):  # AGGIUNGO UN TAG
-        lista.append(TAG(tag_n))
+    @classmethod
+    def add_tag(cls, tag_n):  # AGGIUNGO UN TAG
+        cls.lista.append(TAG(tag_n))
 
-    @staticmethod
-    def search_tag(codice):  # CERCO SE IL TAG ESISTE GIA"
-        for i in range(len(lista)):
-            if lista[i].codice == codice:
+    @classmethod
+    def search_tag(cls, codice):  # CERCO SE IL TAG ESISTE GIA"
+        for i in range(len(cls.lista)):
+            if cls.lista[i].codice == codice:
                 return i
         return "NON PRESENTE"
 
-    @staticmethod
-    def add_value(codice, value, antenna):
-        codice = int(codice)
+    @classmethod
+    def add_value(cls, codice, value, antenna, tempo):
+        codice = str(codice)
         value = int(value)
         antenna = int(antenna)
 
@@ -65,21 +44,27 @@ class TAGS:
         if not isinstance(index, int):
             TAGS.add_tag(codice)
             index = TAGS.search_tag(codice)
+        cls.lista[index].add_value(antenna, value, tempo)
 
-        lista[index].add_value(antenna, value)
-        TAGS.print_tags()
-
-    @staticmethod
-    def print_tags():
-        for tag in lista:
-            tag.print_antenne()
+    @classmethod
+    def dataframe(cls):
+        for tag in cls.lista:
+            print(tag.dati)
+            print(tag.dataframe())
 
 
-def elaborate_data(data, addr):#DA SISTEMARE
-    id_antenna = data[0]
-    n_tag = int(data[1])
-    lista_tag = data[2::]
+def elaborate_data(data, addr):
+    tempo = datetime.now().strftime('%H:%M:%S')
+    richiesta = data[0]
+    id_antenna = data[1]
+    n_tag = int(data[2])
+    lista_tag = data[3::]
     i = 0
     while i < len(lista_tag):
-        TAGS.add_value(lista_tag[i], lista_tag[i + 1], id_antenna)
-        i += 2
+        elab_tag = lista_tag[:6]
+        mac = ':'.join(elab_tag)
+        rssi = lista_tag[6]
+        lista_tag = lista_tag[7:]
+
+        TAGS.add_value(mac, rssi, id_antenna, tempo)
+        i += 1

@@ -32,7 +32,13 @@ class UDPSERVER:
     def richiesta(cls):
         cls.send(WEB_SCAN_REQUEST.encode('ascii'))  # MANDO RICHIESTA BROADCAST
         time.sleep(WEB_REQUEST_SLEEP_TIME)  # ASPETTO TEMPO IMPOSTATO
-        data, addr = (cls.read())  # LEGGO COSA MI é ARRIVATO
-        if data == ANTENNA_SEND_TAGS:
-            modulo_tag.elaborate_data(data, addr)
-        print(data)
+        while True:
+            data, addr = (cls.read())  # LEGGO COSA MI é ARRIVATO
+
+            if data != "NO_DATA": #SE CI SONO DATI AGGIUNGILI
+                print(data)
+                if data[0] == ANTENNA_SEND_TAGS:  # SE LA RISPOSTA E' DELLA SCANSIONE, SALVA I DATI
+                    modulo_tag.elaborate_data(data, addr)
+
+            else: #SE NON CI SON PIU' DATI NEL BUFFER RIMANDA RICHIESTA
+                break
