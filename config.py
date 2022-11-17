@@ -13,8 +13,15 @@ if not os.path.isfile("config.ini"):
         'PORT_BROAD': 2523,
         'TIMEOUT_REC': 3,
         'REQUEST_SLEEP_TIME': 2,
-        'SCAN_REQUEST': 203,
-        'BUFFER_SIZE': 1024}
+        'SCAN_REQUEST': 221,
+        'SYNC_REQUEST': 220,
+        'DEEP_SLEEP_REQUEST': 254,
+        'STOP_REQUEST': 255,
+        'BUFFER_SIZE': 1024,
+        'ANTENNA_SEND_INFO': 200,
+        'ANTENNA_SEND_BUFFER_DISCONNECTED': 202,
+        'ANTENNA_SEND_TAGS': 203
+    }
     with open("config.ini", 'w') as configfile:
         config.write(configfile)
 
@@ -26,4 +33,10 @@ TIMEOUT_REC = int(config['WEB']['TIMEOUT_REC'])
 WEB_PORT_BROAD = int(config['WEB']['PORT_BROAD'])
 WEB_REQUEST_SLEEP_TIME = int(config['WEB']['REQUEST_SLEEP_TIME'])
 WEB_SCAN_REQUEST = str(config['WEB']['SCAN_REQUEST'])
+WEB_SYNC_REQUEST = str(config['WEB']['SYNC_REQUEST'])
+WEB_DEEP_SLEEP_REQUEST = str(config['WEB']['DEEP_SLEEP_REQUEST'])
+WEB_STOP_REQUEST = str(config['WEB']['STOP_REQUEST'])
 WEB_BUFFER_SIZE = int(config['WEB']['BUFFER_SIZE'])
+ANTENNA_SEND_INFO = str(config['WEB']['ANTENNA_SEND_INFO'])
+ANTENNA_SEND_BUFFER_DISCONNECTED = str(config['WEB']['ANTENNA_SEND_BUFFER_DISCONNECTED'])
+ANTENNA_SEND_TAGS = str(config['WEB']['ANTENNA_SEND_TAGS'])

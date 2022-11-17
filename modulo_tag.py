@@ -75,7 +75,7 @@ class TAGS:
             tag.print_antenne()
 
 
-def elaborate_data(data):
+def elaborate_data(data, addr):#DA SISTEMARE
     id_antenna = data[0]
     n_tag = int(data[1])
     lista_tag = data[2::]

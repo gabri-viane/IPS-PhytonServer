@@ -33,4 +33,6 @@ class UDPSERVER:
         cls.send(WEB_SCAN_REQUEST.encode('ascii'))  # MANDO RICHIESTA BROADCAST
         time.sleep(WEB_REQUEST_SLEEP_TIME)  # ASPETTO TEMPO IMPOSTATO
         data, addr = (cls.read())  # LEGGO COSA MI é ARRIVATO
+        if data == ANTENNA_SEND_TAGS:
+            modulo_tag.elaborate_data(data, addr)
         print(data)
