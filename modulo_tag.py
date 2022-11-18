@@ -56,15 +56,15 @@ class TAGS:
 def elaborate_data(data, addr):
     tempo = datetime.now().strftime('%H:%M:%S')
     richiesta = data[0]
-    id_antenna = data[1]
-    n_tag = int(data[2])
-    lista_tag = data[3::]
+    id_antenna = data[2]
+    n_tag = int(data[3])
+    lista_tag = data[4::]
     i = 0
-    while i < len(lista_tag):
+    for i in range(n_tag):
         elab_tag = lista_tag[:6]
         mac = ':'.join(elab_tag)
         rssi = lista_tag[6]
         lista_tag = lista_tag[7:]
 
         TAGS.add_value(mac, rssi, id_antenna, tempo)
-        i += 1
+
